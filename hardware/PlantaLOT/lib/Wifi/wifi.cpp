@@ -1,4 +1,4 @@
-#include "eeprom.h"
+#include "eprom.h"
 #include <ESP8266WiFi.h>
 #include "rgb.h"
 
