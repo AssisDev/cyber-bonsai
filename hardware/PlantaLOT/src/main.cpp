@@ -1,6 +1,8 @@
 #include <Arduino.h>
+#include <EEPROM.h> // Biblioteca da EEPROM
 #include "rgb.h"
 #include "wps.h"
+#include "eprom.h"
 
 #define Botao D3                           // Botão flash do esp GPIO 0
 
@@ -11,7 +13,7 @@ int blue = 4;                              //PINO DIGITAL EM QUE O TERMINAL 'B' 
 #define Botao D3                           // Botão flash do esp GPIO 0
 
 void setup(){
-
+  
 Serial.begin(9600);
 pinMode(red, OUTPUT);
 pinMode(green, OUTPUT);
