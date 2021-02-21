@@ -47,7 +47,7 @@ void EnviaRequest(String API){
     http.end();  //Fechar conexão
     delay(500);
     setColor("green");       
-    delay(10000); 
+    delay(1000); 
     }       
   }
 
