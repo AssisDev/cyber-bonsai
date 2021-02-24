@@ -9,16 +9,17 @@
 #include "wifi.h"
 #include "dht.h"
 #include "api.h"
+#include "umidade_solo.h"
+#include "thingspeak.h"
+#include "tweet.h"
 
 #define Botao D3 // Botão flash do esp GPIO 0
 
 int red = 5;    //PINO DIGITAL EM QUE O TERMINAL 'R' ESTÁ CONECTADO
 int green = 16; //PINO DIGITAL EM QUE O TERMINAL 'G' ESTÁ CONECTADO
 int blue = 4;   //PINO DIGITAL EM QUE O TERMINAL 'B' ESTÁ CONECTADO
-int ValorADC;
-float UmidadePercentual;
 const int pinoDHT11 = 14;
-
+float umidadeSolo = FazLeituraUmidade();
 void setup()
 {
   EEPROM.begin(512);
@@ -34,11 +35,17 @@ void setup()
 
 void loop()
 {
-  EnviaRequest("https://www.google.com/");
-
+  // EnviaRequest("http://c6c3455fb119.ngrok.io/info/");
+  enviarDadosThingSpeak();
+  // tweet("Teste02");
+  delay(30000);
+  
   if (digitalRead(Botao) == LOW)
   {
     WiFi.disconnect();
     WPS(); // Chama função para conexão do WiFi via WPS
   }
+
+  
 }
+  

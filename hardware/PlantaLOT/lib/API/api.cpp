@@ -17,7 +17,7 @@
     for(int i = 0; i < size; i++){
       data += ""+nomes[i]+"\":\"" + valor[i] + "\",\"";
     }
-    data += "}";
+    data += "\"}";
     return data;
   }
 
@@ -34,9 +34,10 @@ void EnviaRequest(String API){
 
     String nomes[] = {"ID", "Umidade do ar", "Umidade do solo", "Temperatura"};
     String valor[] = {"1", (String)DHT.humidity, (String)umidadeSolo, (String)DHT.temperature};
-    String data = montarPost(nomes, valor, 4);
+    String data = "{\"umidade_ar\":\"" + (String)DHT.humidity + "\",\"temperatura\":\"" + (String)DHT.temperature + "\",\"umidade_solo\":\"" + (String)umidadeSolo + "\",\"planta\":\"" + 1 + "\"}";
     Serial.println(data);
-  
+    
+    
     int httpCode = http.POST(data);   //Envie o request
     String payload = http.getString();                  //Get the response payload
 
@@ -47,7 +48,6 @@ void EnviaRequest(String API){
     http.end();  //Fechar conexão
     delay(500);
     setColor("green");       
-    delay(1000); 
     }       
   }
 
